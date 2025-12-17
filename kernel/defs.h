@@ -183,3 +183,8 @@ void            virtio_disk_intr(void);
 
 // number of elements in fixed-size array
 #define NELEM(x) (sizeof(x)/sizeof((x)[0]))
+
+// net.c
+void            netinit(void);
+int             netread(int, uint64, int);
+int             netwrite(int, uint64, int);
