@@ -15,17 +15,16 @@ int main() {
 
     // BƯỚC QUAN TRỌNG NHẤT: In PID để người gửi biết đường mà nhập
     int my_pid = getpid();
-    printf("Receiver: Toi dang chay voi [PID %d]\n", my_pid);
-    printf("Receiver: Hay dung lenh: 'demo_send %d [tin_nhan]'\n", my_pid);
+    printf("[Receiver]: PID: %d\n", my_pid);
 
     // Mở thiết bị net
     fd = open("net", O_RDWR); 
     if(fd < 0){
-        printf("Receiver: Khong the mo thiet bi /net\n"); 
+        printf("[Receiver]: cannot open /net\n"); 
         exit(1);
     }
 
-    printf("Receiver: Dang cho tin nhan tu mang ao...\n");
+    printf("[Receiver]: Connecting...\n");
 
     while(1) {
         // Đọc dữ liệu từ driver (Lúc này Kernel sẽ tự đăng ký PID cho chúng ta)
@@ -43,13 +42,12 @@ int main() {
             // Kết thúc chuỗi để in ra màn hình
             msg[data_len] = '\0';
             
-            printf("\n[TIN NHAN MOI]\n");
-            printf("Tu PID: %d\n", sender_pid);
-            printf("Noi dung: %s\n", msg);
-            printf("Tong bytes: %d\n", total_len);
+            printf("\n=== received new packet ====\n");
+            printf("from PID: %d\n", sender_pid);
+            printf("payload: %s\n", msg);
             printf("--------------------------\n");
         } else if (total_len < 0) {
-            printf("Receiver: Loi doc tin nhan. Exit.\n");
+            printf("[Receiver]: Failed. Exit.\n");
             break;
         }
     }

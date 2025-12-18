@@ -1,5 +1,3 @@
-// kernel/net.h
-
 #define PACKET_MAX 128   // Kích thước tối đa của một gói tin (Payload)
 #define SLOT_BUF_MAX 5    // Mỗi tiến trình có thể chứa tối đa 5 gói tin trong hộp thư riêng
 #define MAX_SLOTS 10      // Tối đa 10 tiến trình (Endpoints) tham gia mạng cùng lúc
@@ -9,8 +7,6 @@ struct packet {
   char data[PACKET_MAX]; // Nội dung tin nhắn
   int len;               // Độ dài thực tế của nội dung
   int sender_pid;  
-  int receiver_pid;      // PID của người gửi (Địa chỉ nguồn)
-  uint timestamp;        // Thời điểm gói tin được tạo (tick của hệ thống)
 };
 
 // Cấu trúc một Hộp thư (Slot/Endpoint)

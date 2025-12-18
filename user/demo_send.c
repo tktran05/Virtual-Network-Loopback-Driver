@@ -55,19 +55,19 @@ int main(int argc, char *argv[]) {
     // 4. Mở thiết bị và gửi
     fd = open("net", O_RDWR);
     if(fd < 0){
-        printf("Sender: Cannot open net device\n");
+        printf("[Sender]: Cannot open net device\n");
         exit(1);
     }
     
-    printf("Sender: Dang gui den PID %d tin nhan: '%s'...\n", target_pid, msg_buf);
+    printf("[Sender]: sending to PID %d \n", target_pid);
     
     // Gửi tổng cộng: 4 byte PID + độ dài tin nhắn
     int n = write(fd, send_buf, HEADER_SIZE + msg_len);
     
     if(n > 0){
-        printf("Sender: Gui thanh cong (%d bytes)!\n", n);
+        printf("[Sender]: Successfully!\n");
     } else {
-        printf("Sender: Gui that bai! (Co the PID %d khong ton tai)\n", target_pid);
+        printf("[Sender]: Failed\n");
     }
 
     close(fd);
